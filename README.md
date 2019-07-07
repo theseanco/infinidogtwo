@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## TODO:
+
+- Look into the following UI development environments:
+    - Storybook
+    - Styleguidist
+
+- Don't forget about code splitting and loading modules conditionally based on use of functionality. http://localhost:3001/create-react-app/docs/code-splitting
+
 ## Available Scripts
 
 In the project directory, you can run:
