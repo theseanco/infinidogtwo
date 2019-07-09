@@ -1,22 +1,21 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components/macro';
-import logo from './logo.svg';
-import swallo from './swallo.svg';
-import './App.css';
+import DogDisplay from './components/DogContainer/DogContainer';
 
 const AppContainer = styled.div`
-  text-align: center;
-`;
-
-const AppHeader = styled.header`
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
+  text-align: center;
+  min-height: 100vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+`;
+
+const AppHeader = styled.header`
+  min-height: 100vh;
 `;
 
 const logoSpin = keyframes`
@@ -37,16 +36,7 @@ const AppLogo = styled.img`
 function App() {
   return (
     <AppContainer>
-      <AppHeader>
-        <AppLogo src={logo} alt="logo" spinTime="30s" />
-        <p>
-          Spinning cat
-        </p>
-        <AppLogo src={swallo} alt="logo" spinTime="20s" />
-        <p>
-          Spinning Bird
-        </p>
-      </AppHeader>
+      <DogDisplay />
     </AppContainer>
   );
 }
