@@ -1,11 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 
+const fallFromAbove = keyframes`
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    // eslint-disable-next-line
+    transform: translate3d(0, ${window.innerHeight + 50}px, 0);
+  }
+`;
+
 const DogImg = styled.img`
+  animation: ${fallFromAbove} 5s linear;
+  animation-fill-mode: forwards;
   display: ${props => (props.isLoaded ? 'block' : 'none')};
+  height: 30%;
   max-height: 100%;
   max-width: 100%;
+  position: absolute;
+  top: 0;
+  transform-origin: top left;
+  width: 30%;
 `;
 
 const DogDisplay = () => {
