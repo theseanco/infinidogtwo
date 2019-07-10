@@ -8,11 +8,6 @@ const DogImg = styled.img`
   max-width: 100%;
 `;
 
-const DogVid = styled.video`
-  max-height: 100%;
-  max-width: 100%;
-`;
-
 const DogDisplay = () => {
   // isLoaded controls image rendering, data takes in JSON from random.dog
   const [data, setData] = useState({ });
