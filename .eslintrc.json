@@ -1,6 +1,10 @@
 {
   "extends": "airbnb",
+  "plugins": [
+    "better-styled-components"
+  ],
   "rules": {
+    "better-styled-components/sort-declarations-alphabetically": 2,
     "react/jsx-filename-extension": false
   }
 }
