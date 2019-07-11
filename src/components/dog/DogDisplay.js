@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import axios from 'axios';
 
+// From MDN, used to randomise dog initial position and animation length
+function getRndInteger(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 const fallFromAbove = keyframes`
   from {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, -300px, 0);
   }
 
   to {
@@ -14,16 +19,16 @@ const fallFromAbove = keyframes`
 `;
 
 const DogImg = styled.img`
-  animation: ${fallFromAbove} 5s linear;
+  animation: ${fallFromAbove} ${getRndInteger(5, 13)}s linear;
   animation-fill-mode: forwards;
   display: ${props => (props.isLoaded ? 'block' : 'none')};
-  height: 30%;
-  max-height: 100%;
-  max-width: 100%;
+  height: auto;
+  left: ${getRndInteger(0, window.innerWidth - 50)}px;
+  max-height: 300px;
   position: absolute;
   top: 0;
   transform-origin: top left;
-  width: 30%;
+  width: auto;
 `;
 
 const DogDisplay = () => {
