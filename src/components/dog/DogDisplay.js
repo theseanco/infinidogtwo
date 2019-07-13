@@ -54,15 +54,28 @@ const DogDisplay = () => {
     fetchData();
   }, []);
 
+  // If the fetch hasn't completed yet, don't return anything.
   if (!data.url) {
     return null;
   }
 
+  // If it's an image, render an image
   if (data.url.match(/\.(jpeg|jpg|gif|png|JPG|PNG|JPEG|GIF)$/) !== null) {
-    return (<DogImg src={data.url} alt="dog" onLoad={() => setIsLoaded(true)} isLoaded={isLoaded} isReady left={randomPos} />);
+    return (
+      <DogImg
+        src={data.url}
+        alt="dog"
+        onLoad={() => setIsLoaded(true)}
+        isLoaded={isLoaded}
+        isReady
+        left={randomPos}
+      />
+    );
   }
 
   return (
+    // If it's a video we need a whole different set of props.
+    // was going to use cloneElement, but this code is fairly DRY
     // As polymorphic prop used to prevent styled-components code repetition
     <DogImg
       as="video"
