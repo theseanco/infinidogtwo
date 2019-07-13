@@ -7,14 +7,24 @@ const getRndInteger = (min, max) => (
   Math.floor(Math.random() * (max - min + 1)) + min
 );
 
+// Two animations, used for media queries. Hardware accelerated.
 const fallFromAbove = keyframes`
   from {
     transform: translate3d(0, -600px, 0);
   }
 
   to {
-    // eslint-disable-next-line
     transform: translate3d(0, 100vh, 0);
+  }
+`;
+
+const scrollFromLeft = keyframes`
+  from {
+    transform: translate3d(-600px, 0, 0);
+  }
+
+  to {
+    transform: translate3d(100vw, 0, 0);
   }
 `;
 
@@ -24,12 +34,22 @@ const DogImg = styled.img`
   animation-play-state: ${props => (props.isReady ? 'running' : 'paused')};
   display: ${props => (props.isLoaded ? 'block' : 'none')};
   height: auto;
-  left: ${props => props.left || 0}vw;
+  left: ${props => props.offset || 0}vw;
   max-height: 300px;
   position: absolute;
   top: 0;
   transform-origin: top left;
   width: auto;
+  
+  // for big screens go from left to right (mobile first)
+  @media screen and (min-width: 1025px) {
+    animation: ${scrollFromLeft} ${props => props.animLength || 7}s linear;
+    animation-fill-mode: forwards;
+    animation-play-state: ${props => (props.isReady ? 'running' : 'paused')};
+    left: 0;
+    top: ${props => props.offset || 0}vh;
+    transform-origin: top right;
+  }
 `;
 
 const DogDisplay = () => {
@@ -50,8 +70,7 @@ const DogDisplay = () => {
       setData(result.data);
     };
     // Set the random position that will be used to offset left or top
-    setRandomPos(getRndInteger(0, 95));
-    // Set the animation length: TODO USE
+    setRandomPos(getRndInteger(0, 80));
     setAnimLength(getRndInteger(7, 17));
 
     fetchData();
@@ -71,7 +90,7 @@ const DogDisplay = () => {
         onLoad={() => setIsLoaded(true)}
         isLoaded={isLoaded}
         isReady
-        left={randomPos}
+        offset={randomPos}
         animLength={animLength}
       />
     );
@@ -92,7 +111,7 @@ const DogDisplay = () => {
       onCanPlay={() => setVideoLoaded(true)}
       isLoaded={isLoaded}
       isReady={videoLoaded}
-      left={randomPos}
+      offset={randomPos}
       animLength={animLength}
     />
   );
