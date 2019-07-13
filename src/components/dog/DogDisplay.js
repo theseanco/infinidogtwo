@@ -19,12 +19,12 @@ const fallFromAbove = keyframes`
 `;
 
 const DogImg = styled.img`
-  animation: ${fallFromAbove} 7s linear;
+  animation: ${fallFromAbove} ${props => props.animLength || 7}s linear;
   animation-fill-mode: forwards;
   animation-play-state: ${props => (props.isReady ? 'running' : 'paused')};
   display: ${props => (props.isLoaded ? 'block' : 'none')};
   height: auto;
-  left: ${props => props.left}vw;
+  left: ${props => props.left || 0}vw;
   max-height: 300px;
   position: absolute;
   top: 0;
@@ -49,7 +49,10 @@ const DogDisplay = () => {
 
       setData(result.data);
     };
+    // Set the random position that will be used to offset left or top
     setRandomPos(getRndInteger(0, 95));
+    // Set the animation length: TODO USE
+    setAnimLength(getRndInteger(7, 17));
 
     fetchData();
   }, []);
@@ -69,6 +72,7 @@ const DogDisplay = () => {
         isLoaded={isLoaded}
         isReady
         left={randomPos}
+        animLength={animLength}
       />
     );
   }
@@ -89,6 +93,7 @@ const DogDisplay = () => {
       isLoaded={isLoaded}
       isReady={videoLoaded}
       left={randomPos}
+      animLength={animLength}
     />
   );
 };
