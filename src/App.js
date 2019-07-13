@@ -9,10 +9,18 @@ const AppContainer = styled.div`
   position: relative;
 `;
 
+const generateID = () => Math.random().toString(16).slice(-6);
+
+const idArray = Array.from({ length: 10 }, () => generateID());
+
 function App() {
   return (
     <AppContainer>
-      <DogDisplay />
+      {
+        idArray.map((uniqueID, index) => (
+          <DogDisplay key={uniqueID} />
+        ))
+      }
     </AppContainer>
   );
 }
