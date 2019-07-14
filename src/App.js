@@ -16,7 +16,7 @@ const idArray = Array.from({ length: 10 }, () => generateID());
 
 const newIDArray = [generateID()];
 
-setInterval(() => { newIDArray.push(generateID()); }, 4000);
+// setInterval(() => { newIDArray.push(generateID()); }, 4000);
 
 function App() {
   const [dogInterval, setDogInterval] = useState();
@@ -24,13 +24,13 @@ function App() {
 
   // This makes the code work, but i don't really know why.
   useEffect(() => {
-    setDogInterval(setInterval(() => { setDogArray([...dogArray, generateID()]); }, 5000));
+    setDogInterval(setInterval(() => { setDogArray(prevDogArray => prevDogArray.push(generateID())); console.log(dogArray); }, 5000));
   }, []);
 
   return (
     <AppContainer>
       {
-        newIDArray.map((uniqueID, index) => (
+        dogArray.map((uniqueID, index) => (
           <DogDisplay key={uniqueID} />
         ))
       }
