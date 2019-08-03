@@ -20,12 +20,21 @@ const newIDArray = [generateID()];
 
 function App() {
   const [dogInterval, setDogInterval] = useState();
-  const [dogArray, setDogArray] = useState([]);
+  const [dogArray, setDogArray] = useState(idArray);
 
   // This makes the code work, but i don't really know why.
   useEffect(() => {
-    setDogInterval(setInterval(() => { setDogArray(prevDogArray => prevDogArray.push(generateID())); console.log(dogArray); }, 5000));
+    /*
+    setDogInterval(setInterval(() => setDogArray((prevDogArray) => {
+      const newArray = prevDogArray;
+      newArray.push(generateID());
+      return newArray;
+    }), 5000));
+    */
+    setDogInterval(setInterval(() => setDogArray(prevDogArray => prevDogArray.concat([generateID()])), 5000));
   }, []);
+
+  console.log(dogArray);
 
   return (
     <AppContainer>
